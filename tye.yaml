@@ -1,0 +1,10 @@
+name: my-store
+services:
+- name: frontend
+  project: app/MyStore.App.csproj
+- name: bff
+  azureFunction: bff/
+- name: catalog-api
+  azureFunction: catalog/
+- name: orders-api
+  azureFunction: orders/
