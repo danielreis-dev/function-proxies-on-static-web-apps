@@ -4,7 +4,12 @@ services:
   project: app/MyStore.App.csproj
 - name: bff
   azureFunction: bff/
-- name: catalog-api
+  env:
+    - name: "SERVICE__CATALOG__KEY"
+      value: "catalog_key"
+    - name: "SERVICE_ORDERS_KEY"
+      value: "orders_key"
+- name: catalog
   azureFunction: catalog/
-- name: orders-api
+- name: orders
   azureFunction: orders/
