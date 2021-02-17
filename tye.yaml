@@ -1,15 +1,14 @@
 name: my-store
 services:
-- name: frontend
-  project: app/MyStore.App.csproj
 - name: bff
   azureFunction: bff/
-  env:
-    - name: "SERVICE__CATALOG__KEY"
-      value: "catalog_key"
-    - name: "SERVICE_ORDERS_KEY"
-      value: "orders_key"
 - name: catalog
   azureFunction: catalog/
+  bindings:
+    - protocol: http
+      connectionString: ${protocol}://${host}:${port}
 - name: orders
   azureFunction: orders/
+  bindings:
+    - protocol: http
+      connectionString: ${protocol}://${host}:${port}

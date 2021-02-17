@@ -5,7 +5,7 @@
             "matchCondition": {
                 "route": "/api/catalog"
             },
-            "backendUri": "%SERVICE__CATALOG__HOST%://%SERVICE__CATALOG__HOST%:%SERVICE__CATALOG__PORT%/api/catalog",
+            "backendUri": "%CONNECTIONSTRINGS__CATALOG%/api/catalog",
             "requestOverrides": {
                 "backend.request.querystring.key": "%SERVICE__CATALOG__KEY%"
             }
@@ -14,7 +14,7 @@
             "matchCondition": {
                 "route": "/api/orders"
             },
-            "backendUri": "%SERVICE__ORDERS__HOST%://%SERVICE__ORDERS__HOST%:%SERVICE__ORDERS__PORT%/api/orders",
+            "backendUri": "%CONNECTIONSTRINGS__ORDERS%/api/orders",
             "requestOverrides": {
                 "backend.request.querystring.key": "%SERVICE__ORDERS__KEY%"
             }
