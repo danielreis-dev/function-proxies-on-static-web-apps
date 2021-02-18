@@ -1,15 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyStore.Bff", "bff\MyStore.Bff.csproj", "{DB5109F7-D09F-4B48-BF99-854FCFEBB59E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyStore.Bff", "bff\MyStore.Bff.csproj", "{DB5109F7-D09F-4B48-BF99-854FCFEBB59E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyStore.App", "app\MyStore.App.csproj", "{8A0B70F8-216B-467B-90AB-9350AF792FD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyStore.App", "app\MyStore.App.csproj", "{8A0B70F8-216B-467B-90AB-9350AF792FD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyStore.Catalog", "catalog\MyStore.Catalog.csproj", "{E7A1C1B8-D28E-4B3A-92EA-631117B44ECA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyStore.Catalog", "catalog\MyStore.Catalog.csproj", "{E7A1C1B8-D28E-4B3A-92EA-631117B44ECA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyStore.Orders", "orders\MyStore.Orders.csproj", "{F6EF748F-3BFA-417F-BD01-9BC19A09C7B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyStore.Orders", "orders\MyStore.Orders.csproj", "{F6EF748F-3BFA-417F-BD01-9BC19A09C7B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B36AF1EC-6BF7-4185-B2E8-EDFFDBEDE3AC}"
+	ProjectSection(SolutionItems) = preProject
+		tye.yaml = tye.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +24,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DB5109F7-D09F-4B48-BF99-854FCFEBB59E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,5 +74,11 @@ Global
 		{F6EF748F-3BFA-417F-BD01-9BC19A09C7B4}.Release|x64.Build.0 = Release|Any CPU
 		{F6EF748F-3BFA-417F-BD01-9BC19A09C7B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{F6EF748F-3BFA-417F-BD01-9BC19A09C7B4}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF50841D-579C-405D-A8B9-E8C83F330751}
 	EndGlobalSection
 EndGlobal
