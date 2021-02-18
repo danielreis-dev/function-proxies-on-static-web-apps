@@ -1,0 +1,84 @@
+﻿@page "/cart"
+@using System.Threading
+@inject ShoppingCart ShoppingCart
+@inject IBackendClient Backend
+
+
+<h1>Cart</h1>
+
+<table class="table">
+    <caption>Total: @ShoppingCart.Items.Count items, @ShoppingCart.Items.Sum(c => c.Price).ToString("C")</caption>
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in ShoppingCart.Items.GroupBy(i => new {i.Id, i.Name, i.Price}))
+    {
+        <tr>
+            <th scope="row">@item.Key.Id</th>
+            <td>@item.Key.Name</td>
+            <td>@item.Key.Price.ToString("C")</td>
+            <td>@item.Count()</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<button class="btn btn-success" disabled="@_loading" @onclick="@(async () => await CreateOrder())">Finish Order</button>
+
+@if (ErrorMessage is not null)
+{
+    <div class="alert alert-danger my-2">
+        @ErrorMessage
+    </div>
+}
+
+@if (LatestOrder is not null)
+{
+    <div class="alert alert-success my-2">
+        Your order was created successfully and its status is now: @LatestOrder.Status. (Order ID: @LatestOrder.OrderId)
+    </div>
+}
+
+@code {
+
+    private bool _loading;
+    private readonly SemaphoreSlim _semaphoreSlim = new(1, 1);
+
+    [Parameter]
+    public OrderCreationResponse LatestOrder { get; set; }
+
+    [Parameter]
+    public string ErrorMessage { get; set; }
+
+    public async Task CreateOrder()
+    {
+        try
+        {
+            await _semaphoreSlim.WaitAsync();
+
+            _loading = true;
+
+            LatestOrder = await Backend.CreateOrderAsync(ShoppingCart.CreateOrderItems());
+
+            ShoppingCart.ClearCart();
+
+            ErrorMessage = null;
+        }
+        catch (Refit.ApiException e)
+        {
+            ErrorMessage = $"There was a problem while creating your order, please try again. ({(int) e.StatusCode})";
+        }
+        finally
+        {
+            _loading = false;
+
+            _semaphoreSlim.Release();
+        }
+    }
+}

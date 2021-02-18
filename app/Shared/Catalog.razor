@@ -1,0 +1,23 @@
+﻿<div class="row">
+
+    @foreach (var item in CatalogItems)
+    {
+        <div class="card mb-4" style="width: 18rem;">
+            <img class="card-img-top" src="@item.ImageUrl" alt="@item.Name">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Price.ToString("C")</p>
+                <button class="btn btn-primary" @onclick="@(async _ => await CatalogItemClicked.InvokeAsync(item))">Add to Cart</button>
+            </div>
+        </div>
+
+    }
+</div>
+
+@code {
+    [Parameter]
+    public IEnumerable<CatalogItem> CatalogItems { get; set; }
+
+    [Parameter]
+    public EventCallback<CatalogItem> CatalogItemClicked { get; set; }
+}

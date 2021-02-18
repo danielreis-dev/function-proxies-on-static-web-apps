@@ -1,7 +1,57 @@
 ﻿@page "/"
+@using System.Threading
+@inject ShoppingCart Cart;
+@inject IBackendClient Backend;
 
-<h1>Hello, world!</h1>
+<h1>Welcome to MyStore!</h1>
 
-Welcome to your new app.
+<h3>Current Page: @(PageIndex + 1)</h3>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="row mb-2">
+    <div class="btn-group">
+        <button class="btn btn-info" disabled="@(_loading || PageIndex <= 0)" 
+                @onclick="@(async () => await UpdateCatalog(-1))">Previous Page</button>
+
+        <button class="btn btn-info" disabled="@_loading" 
+                @onclick="@(async () => await UpdateCatalog(+1))">Next Page</button>
+    </div>
+</div>
+
+<Catalog CatalogItems="@CatalogItems" CatalogItemClicked="@(item => Cart.AddItem(item))"></Catalog>
+
+@code {
+
+    private bool _loading;
+    private readonly SemaphoreSlim _semaphore = new(1, 1);
+
+    public int PageIndex { get; set; }
+
+    public IEnumerable<CatalogItem> CatalogItems { get; set; } = Enumerable.Empty<CatalogItem>();
+
+    private async Task UpdateCatalog(int indexUpdate)
+    {
+        try
+        {
+            await _semaphore.WaitAsync();
+
+            _loading = true;
+
+            PageIndex += indexUpdate;
+
+            CatalogItems = await Backend.GetCatalogAsync(PageIndex);
+        }
+        finally
+        {
+            _loading = false;
+
+            _semaphore.Release();
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        await UpdateCatalog(0);
+    }
+}
