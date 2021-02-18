@@ -17,10 +17,9 @@ namespace MyStore.App
             builder.Services.AddRefitClient<IBackendClient>()
                 .ConfigureHttpClient(client =>
                 {
-                    if (builder.HostEnvironment.IsDevelopment())
-                    {
-                        client.BaseAddress = new Uri("http://localhost:7070");
-                    }
+                    client.BaseAddress = new Uri(builder.HostEnvironment.IsDevelopment()
+                        ? "http://localhost:7070"
+                        : builder.HostEnvironment.BaseAddress);
                 });
 
             await builder.Build().RunAsync();
