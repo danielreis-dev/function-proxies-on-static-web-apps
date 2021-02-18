@@ -15,7 +15,13 @@ namespace MyStore.App
 
             builder.Services.AddSingleton<ShoppingCart>();
             builder.Services.AddRefitClient<IBackendClient>()
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri("http://localhost:7070"));
+                .ConfigureHttpClient(client =>
+                {
+                    if (builder.HostEnvironment.IsDevelopment())
+                    {
+                        client.BaseAddress = new Uri("http://localhost:7070");
+                    }
+                });
 
             await builder.Build().RunAsync();
         }
