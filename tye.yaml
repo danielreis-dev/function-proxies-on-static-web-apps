@@ -2,6 +2,9 @@ name: my-store
 services:
 - name: bff
   azureFunction: bff/
+  bindings:
+  - protocol: http
+    port: 7070
 - name: catalog
   azureFunction: catalog/
   bindings:
