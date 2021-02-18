@@ -7,7 +7,7 @@
             },
             "backendUri": "%CONNECTIONSTRINGS__CATALOG%/api/catalog",
             "requestOverrides": {
-                "backend.request.querystring.key": "%SERVICE__CATALOG__KEY%"
+                "backend.request.querystring.code": "%SERVICE__CATALOG__KEY%"
             }
         },
         "orders": {
@@ -16,7 +16,7 @@
             },
             "backendUri": "%CONNECTIONSTRINGS__ORDERS%/api/orders",
             "requestOverrides": {
-                "backend.request.querystring.key": "%SERVICE__ORDERS__KEY%"
+                "backend.request.querystring.code": "%SERVICE__ORDERS__KEY%"
             }
         }
     }
