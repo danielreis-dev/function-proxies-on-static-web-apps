@@ -1,5 +1,9 @@
 name: my-store
 services:
+- name: frontend
+  project: app/MyStore.App.csproj
+  bindings:
+    - protocol: http
 - name: bff
   azureFunction: bff/
   bindings:
