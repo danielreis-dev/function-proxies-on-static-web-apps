@@ -1,4 +1,4 @@
-name: my-store
+name: my-store2
 services:
 - name: frontend
   project: app/MyStore.App.csproj
